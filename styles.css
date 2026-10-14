@@ -1,0 +1,166 @@
+:root {
+  --bg: #fbf6ec;
+  --surface: #fffdf8;
+  --text: #2b1d14;
+  --muted: #5e4a3c;
+  --accent: #7a1f1f;
+  --accent-hover: #5c1515;
+  --saffron: #d9822b;
+  --border: #e6d9c3;
+  --serif: "Noto Serif", "Tiro Devanagari Hindi", Georgia, serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--serif);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px 16px 18px;
+  border-bottom: 3px solid var(--saffron);
+  background: var(--surface);
+}
+
+.logo-placeholder,
+.logo {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+}
+
+.logo-placeholder {
+  display: grid;
+  place-items: center;
+  border: 2px dashed var(--border);
+  border-radius: 50%;
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+.logo { object-fit: contain; }
+
+.titles { text-align: center; }
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+}
+
+.subtitle {
+  margin: 4px 0 0;
+  font-size: 1rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+
+/* Flipbook */
+main {
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px 8px;
+}
+
+.book-frame {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 0 2px 12px rgba(60, 30, 10, 0.06);
+  position: relative;
+}
+
+/* Shown behind the iframe until Heyzine paints over it */
+.book-frame::before {
+  content: "Loading the book…";
+  position: absolute;
+  top: 40%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+/* Overrides the 400px inline height from the Heyzine embed code */
+.book-frame iframe {
+  position: relative;
+  display: block;
+  width: 100% !important;
+  height: 85vh !important;
+  border: 0 !important;
+  border-radius: 4px;
+}
+
+/* Actions */
+.actions {
+  text-align: center;
+  padding: 20px 0 8px;
+}
+
+.button {
+  display: inline-block;
+  padding: 12px 28px;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+.button:hover { background: var(--accent-hover); }
+
+.button:focus-visible,
+.note a:focus-visible {
+  outline: 3px solid var(--saffron);
+  outline-offset: 3px;
+}
+
+.note {
+  margin: 12px 0 0;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.note a { color: var(--accent); }
+
+/* Footer */
+.site-footer {
+  text-align: center;
+  padding: 20px 16px 28px;
+  margin-top: 16px;
+  border-top: 1px solid var(--border);
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.site-footer p { margin: 2px 0; }
+
+/* Mobile */
+@media (max-width: 640px) {
+  .site-header { padding: 16px 16px 14px; gap: 12px; }
+  .logo-placeholder, .logo { width: 44px; height: 44px; }
+  main { padding: 12px 0 4px; }
+  .book-frame { border-radius: 0; border-left: 0; border-right: 0; padding: 0; box-shadow: none; }
+  .book-frame iframe { height: 80vh !important; border-radius: 0; }
+  .actions { padding: 16px 16px 4px; }
+}
